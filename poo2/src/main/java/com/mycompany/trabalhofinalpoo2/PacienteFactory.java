@@ -4,33 +4,17 @@
  */
 package com.mycompany.trabalhofinalpoo2;
 
+
 public class PacienteFactory {
-    public static Paciente criarPaciente(
-            String tipo, String nome, String dataNascimento, String endereco, String contato,
-            String historicoConsultas, String medicoPreferencia, String planoDeSaude,
-            String periodicidadeConsultas, String observacoes,
-            CriterioPrioridade criterioPrioridade, int nivelPrioridade,
-            String servicosAdicionais, String acessoEspecialistas,
-            String dataCadastroVIP, String nomeResponsavel, String contatoResponsavel,
-            String informacoesPediatricas, String escola, boolean autorizacaoTratamentos,
-            String medicoPediatraPreferencial) {
+    public static Paciente criarPaciente(String tipo) {
 
         // Utilizando equals para comparar strings
         if (tipo.equalsIgnoreCase("Regular")) {
-            return new PacienteRegular(
-                    nome, dataNascimento, endereco, contato,
-                    historicoConsultas, medicoPreferencia, planoDeSaude,
-                    periodicidadeConsultas, observacoes);
+            return new PacienteRegular();
         } else if (tipo.equalsIgnoreCase("VIP")) {
-            return new PacienteVIP(
-                    nome, dataNascimento, endereco, contato,
-                    criterioPrioridade, servicosAdicionais,
-                    acessoEspecialistas, dataCadastroVIP, nivelPrioridade);
+            return new PacienteVIP();
         } else if (tipo.equalsIgnoreCase("Infantil")) {
-            return new PacienteInfantil(
-                    nome, dataNascimento, endereco, contato,
-                    nomeResponsavel, contatoResponsavel, informacoesPediatricas,
-                    escola, autorizacaoTratamentos, medicoPediatraPreferencial);
+            return new PacienteInfantil();
         }
 
         // Caso o tipo seja inválido, lançar uma exceção

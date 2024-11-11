@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciamento de Consultas Médicas</title>
+    <style>
+        /* Reseta estilos padrão */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Cores principais */
+        :root {
+            --blue-light: #E0F7FA;
+            --blue-dark: #00796B;
+            --gray: #B0BEC5;
+            --white: #FFFFFF;
+        }
+
+        /* Estilos da página */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--blue-light);
+            color: var(--blue-dark);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+
+            /* Configuração da imagem de fundo */
+            background-image: url('img2.png'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover; /* Ajusta a imagem para cobrir toda a tela */
+            background-position: center; /* Centraliza a imagem de fundo */
+            background-attachment: fixed; /* Mantém a imagem fixa ao rolar */
+        }
+
+        /* Container principal */
+        .container {
+            background-color: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            text-align: center;
+        }
+        .logo {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 50px; /* ajuste o tamanho da logo conforme necessário */
+            height: auto;
+        }
+
+        /* Título */
+        .title {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--blue-dark);
+        }
+
+        /* Botões */
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+        }
+
+        .button {
+            background-color: var(--blue-dark);
+            color: var(--white);
+            border: none;
+            border-radius: 4px;
+            padding: 15px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: transform 0.3s, background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: var(--gray);
+            transform: scale(1.05);
+        }
+
+        /* Animação dos botões */
+        .button:active {
+            transform: scale(0.95);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 1.8rem;
+            }
+            .button {
+                font-size: 1rem;
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .title {
+                font-size: 1.5rem;
+            }
+            .button {
+                font-size: 0.9rem;
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">Gerenciamento de Consultas Médicas</h1>
+        <div class="button-group">
+            <button class="button">Pacientes</button>
+            <button class="button">Médicos</button>
+            <button class="button">Consultas</button>
+        </div>
+    </div>
+    <
+</body>
+</html>

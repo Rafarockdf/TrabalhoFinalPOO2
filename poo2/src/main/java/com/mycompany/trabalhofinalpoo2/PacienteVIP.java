@@ -4,21 +4,31 @@
  */
 package com.mycompany.trabalhofinalpoo2;
 
+
 public class PacienteVIP extends Paciente {
-    private CriterioPrioridade criterioPrioridade;
+    
     private int nivelPrioridade;
     private String servicosAdicionais;
     private String acessoEspecialistas;
     private String dataCadastroVIP;
 
-    public PacienteVIP(String nome, String dataNascimento, String endereco, String contato,
-                       CriterioPrioridade criterioPrioridade, String servicosAdicionais,
-                       String acessoEspecialistas, String dataCadastroVIP, int nivelPrioridade) {
-        super(nome, dataNascimento, endereco, contato);
-        this.criterioPrioridade = criterioPrioridade;
+    public PacienteVIP() {
+        super("", "", "", "","");
+    }
+    
+    public void setInformacoes(String nome,String cpf, String dataNascimento, String endereco, String contato,
+                       String servicosAdicionais,
+                       String acessoEspecialistas, int nivelPrioridade) {
+        // Configurando os atributos da classe pai
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.contato = contato;
+        setCpf(cpf);
+        //Atrbitos classe filha
+      
         this.servicosAdicionais = servicosAdicionais;
         this.acessoEspecialistas = acessoEspecialistas;
-        this.dataCadastroVIP = dataCadastroVIP;
         this.nivelPrioridade = nivelPrioridade;
     }
     // Getters e Setters
@@ -30,13 +40,6 @@ public class PacienteVIP extends Paciente {
         this.nivelPrioridade = nivelPrioridade;
     }
     
-    public CriterioPrioridade getCriterioPrioridade() {
-        return criterioPrioridade;
-    }
-
-    public void setCriterioPrioridade(CriterioPrioridade criterioPrioridade) {
-        this.criterioPrioridade = criterioPrioridade;
-    }
 
     public String getServicosAdicionais() {
         return servicosAdicionais;
@@ -64,16 +67,12 @@ public class PacienteVIP extends Paciente {
         this.dataCadastroVIP = dataAdesaoProgramaVIP;
     }
 
-    // Método para verificar se o paciente tem alta prioridade
-    public boolean isAltaPrioridade() {
-        return criterioPrioridade != null;
-    }
+
 
     @Override
     public String toString() {
         return "PacienteVIP{" +
                 "nome='" + getNome() + '\'' +
-                ", criterioPrioridade=" + criterioPrioridade +
                 ", nivelPrioridade=" + nivelPrioridade +
                 ", servicosAdicionais='" + servicosAdicionais + '\'' +
                 ", acessoEspecialistas='" + acessoEspecialistas + '\'' +

@@ -4,6 +4,7 @@
  */
 package com.mycompany.trabalhofinalpoo2;
 
+
 public class PacienteRegular extends Paciente {
     private String historicoConsultas;
     private String medicoPreferencia;
@@ -11,16 +12,27 @@ public class PacienteRegular extends Paciente {
     private String periodicidadeConsultas;
     private String observacoes;
 
-    public PacienteRegular(String nome, String dataNascimento, String endereco, String contato,
+    public PacienteRegular() {
+        super("", "", "", "","");
+    }
+
+    public void setInformacoes(String nome,String cpf, String dataNascimento, String endereco, String contato,
                            String historicoConsultas, String medicoPreferencia, String planoDeSaude,
                            String periodicidadeConsultas, String observacoes) {
-        super(nome, dataNascimento, endereco, contato);
+         // Configurando os atributos da classe pai
+        setNome(nome);
+        setDataNascimento(dataNascimento);
+        setEndereco(endereco);
+        setContato(contato);
+        setCpf(cpf);
+        //Atrbitos classe filha
         this.historicoConsultas = historicoConsultas;
         this.medicoPreferencia = medicoPreferencia;
         this.planoDeSaude = planoDeSaude;
         this.periodicidadeConsultas = periodicidadeConsultas;
         this.observacoes = observacoes;
     }
+    
 
     // Getters e Setters
     public String getHistoricoConsultas() {
@@ -62,4 +74,24 @@ public class PacienteRegular extends Paciente {
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
     }
+    
+    @Override
+    public String toString() {
+        return "PacienteRegular{" +
+            "nome='" + getNome() + '\'' +
+            ", cpf ='"+ getCpf() + '\'' + 
+            ", dataNascimento='" + getDataNascimento() + '\'' +
+            ", endereco='" + getEndereco() + '\'' +
+            ", contato='" + getContato() + '\'' +
+            ", historicoConsultas='" + historicoConsultas + '\'' +
+            ", medicoPreferencia='" + medicoPreferencia + '\'' +
+            ", planoDeSaude='" + planoDeSaude + '\'' +
+            ", periodicidadeConsultas='" + periodicidadeConsultas + '\'' +
+            ", observacoes='" + observacoes + '\'' +
+            '}';
+    }
+
+
+    
+    
 }

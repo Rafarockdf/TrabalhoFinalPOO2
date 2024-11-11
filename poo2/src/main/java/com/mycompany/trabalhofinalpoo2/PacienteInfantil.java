@@ -1,4 +1,4 @@
-/*
+  /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -13,17 +13,13 @@ public class PacienteInfantil extends Paciente {
     private String medicoPediatraPreferencial;
     private String dataCadastroInfantil;
 
-    public PacienteInfantil(String nome, String dataNascimento, String endereco, String contato,
-                            String nomeResponsavel, String contatoResponsavel, String informacoesPediatricas,
-                            String escola, boolean autorizacaoTratamentos, String medicoPediatraPreferencial) {
-        super(nome, dataNascimento, endereco, contato);
-        this.nomeResponsavel = nomeResponsavel;
-        this.contatoResponsavel = contatoResponsavel;
-        this.informacoesPediatricas = informacoesPediatricas;
-        this.escola = escola;
-        this.autorizacaoTratamentos = autorizacaoTratamentos;
-        this.medicoPediatraPreferencial = medicoPediatraPreferencial;
+    // Construtor padrão vazio
+    public PacienteInfantil() {
+        super("", "", "", "",""); // Chamando o construtor da classe Paciente com valores vazios
     }
+
+    // Método para definir todas as informações do paciente
+    
 
     // Getters e Setters
     public String getNomeResponsavel() {
@@ -71,6 +67,25 @@ public class PacienteInfantil extends Paciente {
     }
 
     public void setMedicoPediatraPreferencial(String medicoPediatraPreferencial) {
+        this.medicoPediatraPreferencial = medicoPediatraPreferencial;
+    }
+
+    public void setInformacoes(String nome,String cpf, String dataNascimento, String endereco, String contato,
+                               String nomeResponsavel, String contatoResponsavel, String informacoesPediatricas,
+                               String escola, boolean autorizacaoTratamentos, String medicoPediatraPreferencial) {
+        // Configurando os atributos da classe pai
+        this.nome = nome;
+        this.dataNascimento = dataNascimento;
+        this.endereco = endereco;
+        this.contato = contato;
+        setCpf(cpf);
+
+        // Configurando os atributos específicos de PacienteInfantil
+        this.nomeResponsavel = nomeResponsavel;
+        this.contatoResponsavel = contatoResponsavel;
+        this.informacoesPediatricas = informacoesPediatricas;
+        this.escola = escola;
+        this.autorizacaoTratamentos = autorizacaoTratamentos;
         this.medicoPediatraPreferencial = medicoPediatraPreferencial;
     }
 }
