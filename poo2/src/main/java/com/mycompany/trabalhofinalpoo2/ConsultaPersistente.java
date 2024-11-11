@@ -3,6 +3,7 @@ package com.mycompany.trabalhofinalpoo2;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -63,6 +64,83 @@ public class ConsultaPersistente {
             }
         }
     }
+     public void pesquisarConsultas() {
+        Connection conexao = abrirConexao();
+
+        if (conexao != null) {
+            String query = "SELECT * FROM consulta";  // Seleciona todas as consultas
+
+            try (PreparedStatement stmt = conexao.prepareStatement(query)) {
+                ResultSet rs = stmt.executeQuery();
+                if (!rs.isBeforeFirst()) {
+                    System.out.println("Nenhuma consulta encontrada.");
+                } else {
+                    // Itera sobre os resultados e imprime os dados
+                    while (rs.next()) {
+                        String pacienteCpf = rs.getString("paciente_cpf");
+                        String medicoCrm = rs.getString("medico_crm");
+                        java.sql.Date dataConsulta = rs.getDate("data_consulta");
+                        String motivo = rs.getString("motivo");
+                        String observacoes = rs.getString("observacoes");
+
+                        // Formata a data da consulta
+                        SimpleDateFormat formatterOut = new SimpleDateFormat("dd/MM/yyyy");
+                        String dataConsultaStr = formatterOut.format(dataConsulta);
+
+                        // Imprime os detalhes da consulta
+                        System.out.println("Paciente CPF: " + pacienteCpf);
+                        System.out.println("Médico CRM: " + medicoCrm);
+                        System.out.println("Data da Consulta: " + dataConsultaStr);
+                        System.out.println("Motivo: " + motivo);
+                        System.out.println("Observações: " + observacoes);
+                        System.out.println("-----------------------------------------");
+                    }
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                fecharConexao(conexao);
+            }
+        }
+    }
+   public void deletarConsulta(String pacienteCpf, String medicoCrm, String dataConsulta) {
+    Connection conexao = abrirConexao();
+
+    if (conexao != null) {
+        // Preparando a query de exclusão
+        String queryDelete = "DELETE FROM consulta WHERE paciente_cpf = ? AND medico_crm = ? AND data_consulta = ?";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(queryDelete)) {
+            stmt.setString(1, pacienteCpf);
+            stmt.setString(2, medicoCrm);
+
+            // Tentar converter a data para o formato correto (yyyy-mm-dd)
+            SimpleDateFormat sdfEntrada = new SimpleDateFormat("yyyy/MM/dd");  // Formato de entrada
+            SimpleDateFormat sdfSaida = new SimpleDateFormat("yyyy-MM-dd");  // Formato de saída esperado
+
+            java.util.Date date = sdfEntrada.parse(dataConsulta);  // Converter de String para Date
+            String dataFormatada = sdfSaida.format(date);  // Converter para o formato correto (yyyy-MM-dd)
+
+            // Convertendo para java.sql.Date
+            java.sql.Date sqlDate = java.sql.Date.valueOf(dataFormatada); 
+            stmt.setDate(3, sqlDate);
+
+            // Executando o comando de delete
+            int linhasAfetadas = stmt.executeUpdate();
+            if (linhasAfetadas > 0) {
+                System.out.println("Consulta deletada com sucesso.");
+            } else {
+                System.out.println("Nenhuma consulta encontrada para deletar.");
+            }
+        } catch (SQLException | ParseException ex) {
+            ex.printStackTrace();
+        } finally {
+            fecharConexao(conexao);
+        }
+    }
+}
+
+
 
     // Método para fechar a conexão com o banco de dados
     private void fecharConexao(Connection conexao) {

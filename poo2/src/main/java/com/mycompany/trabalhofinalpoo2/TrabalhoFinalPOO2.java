@@ -217,17 +217,17 @@ public class TrabalhoFinalPOO2 {
 
                 }
             } else if (opcaoMenuInicio == 2) {
-    System.out.println(menuEntidades);
-   int opcaoMenuAlterar = scanner.nextInt();
-    scanner.nextLine();  // Consome o \n restante após nextInt()
+                System.out.println(menuEntidades);
+               int opcaoMenuAlterar = scanner.nextInt();
+                scanner.nextLine();  // Consome o \n restante após nextInt()
 
-    if (opcaoMenuAlterar == 1) {
-        PacienteManager manager = new PacienteManager();
-        System.out.println("Digite o CPF do paciente: ");
-        String cpf = scanner.nextLine();  // Agora lê corretamente a linha inteira para o CPF
+                if (opcaoMenuAlterar == 1) {
+                    PacienteManager manager = new PacienteManager();
+                    System.out.println("Digite o CPF do paciente: ");
+                    String cpf = scanner.nextLine();  // Agora lê corretamente a linha inteira para o CPF
 
-        // Chama o método para consultar e alterar os dados
-        manager.consultarEAlterarPaciente(cpf);
+                    // Chama o método para consultar e alterar os dados
+                    manager.consultarEAlterarPaciente(cpf);
     }
     if (opcaoMenuAlterar == 2) {
                 scanner.nextLine(); // Limpar o buffer
@@ -257,17 +257,37 @@ public class TrabalhoFinalPOO2 {
                 medicoPersistente.atualizarMedico(crm, medicoAtualizado);
                 }
             } else if(opcaoMenuInicio == 3){
-              //Excluir  
+                System.out.println(menuEntidades);
+                int opcaoMenuEntidades = scanner.nextInt();
+                if(opcaoMenuEntidades==1){
+                scanner.nextLine();
+                System.out.println("Digite o CPF do paciente a ser deletado: ");
+                String cpf = scanner.nextLine();
+                PacienteManager manager = new PacienteManager();
+                manager.deletarPaciente(cpf);
+                }
+                else if(opcaoMenuEntidades==3){
+                    scanner.nextLine();
+                    System.out.print("Digite o CPF do paciente (somente números): ");
+                    String pacienteCpf = scanner.nextLine();
+                    System.out.print("Digite o CRM do médico: ");
+                    String medicoCrm = scanner.nextLine();
+                    System.out.print("Digite a data da consulta (formato: yyyy-mm-dd): ");
+                    String dataConsulta = scanner.nextLine();
+                    ConsultaPersistente consultaPersistente = ConsultaPersistente.getInstancia();
+                    consultaPersistente.deletarConsulta(pacienteCpf, medicoCrm, dataConsulta);
+                }
             } else if(opcaoMenuInicio == 4){
               System.out.println(menuEntidades);
               int opcaoEntidade = scanner.nextInt();
-              
+              scanner.nextLine();
               switch (opcaoEntidade) {
                     case 1:
                         System.out.println("1 - Regular");
                         System.out.println("2 - VIP");
                         System.out.println("3 - Infantil");
                         int opcaoTipoEntidade =  scanner.nextInt();
+                        scanner.nextLine();
                         switch (opcaoTipoEntidade) {
                             case 1:
                                 PacientePersistenteRegular pacientePersistente = new PacientePersistenteRegular();
@@ -288,15 +308,21 @@ public class TrabalhoFinalPOO2 {
                         break;
 
                     case 2:
-                        
+                        MedicoPersistente medicoPersistente = new MedicoPersistente();
+                        medicoPersistente.consultarMedicos();
                         break;
-              }
-                
-            } else if(opcaoMenuInicio == 5){
-              //Ver  
-            } else if(opcaoMenuInicio == 6){
-              System.out.println("\nSaindo...");  
+                    case 3:
+                        ConsultaPersistente consultaPersistente = ConsultaPersistente.getInstancia();
+                        consultaPersistente.pesquisarConsultas(); 
+                        break;
+                  }
+              
+
+                } else if(opcaoMenuInicio == 5){
+                  //Ver  
+                } else if(opcaoMenuInicio == 6){
+                  System.out.println("\nSaindo...");  
+                }
             }
-        }
     }
 }

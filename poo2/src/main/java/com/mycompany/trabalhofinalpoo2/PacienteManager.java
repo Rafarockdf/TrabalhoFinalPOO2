@@ -82,6 +82,58 @@ public class PacienteManager {
             }
         }
     }
+    public void deletarPaciente(String cpf) {
+    Connection conexao = abrirConexao();
+    if (conexao != null) {
+        String queryPaciente = "DELETE FROM paciente WHERE cpf = ?";
+        String queryPacienteVIP = "DELETE FROM PacienteVIP WHERE paciente_cpf = ?";
+        String queryPacienteRegular = "DELETE FROM PacienteRegular WHERE paciente_cpf = ?";
+        String queryPacienteInfantil = "DELETE FROM PacienteInfantil WHERE paciente_cpf = ?";
+
+        try {
+            // Tentar deletar o paciente na tabela 'paciente'
+            PreparedStatement stmt = conexao.prepareStatement(queryPaciente);
+            stmt.setString(1, cpf);
+            int rowsAffected = stmt.executeUpdate();
+
+            if (rowsAffected > 0) {
+                System.out.println("Paciente deletado da tabela 'paciente'.");
+            } else {
+                // Caso não tenha encontrado na tabela 'paciente', tentar nas outras tabelas
+                stmt = conexao.prepareStatement(queryPacienteVIP);
+                stmt.setString(1, cpf);
+                rowsAffected = stmt.executeUpdate();
+
+                if (rowsAffected > 0) {
+                    System.out.println("Paciente VIP deletado.");
+                } else {
+                    stmt = conexao.prepareStatement(queryPacienteRegular);
+                    stmt.setString(1, cpf);
+                    rowsAffected = stmt.executeUpdate();
+
+                    if (rowsAffected > 0) {
+                        System.out.println("Paciente Regular deletado.");
+                    } else {
+                        stmt = conexao.prepareStatement(queryPacienteInfantil);
+                        stmt.setString(1, cpf);
+                        rowsAffected = stmt.executeUpdate();
+
+                        if (rowsAffected > 0) {
+                            System.out.println("Paciente Infantil deletado.");
+                        } else {
+                            System.out.println("Paciente não encontrado em nenhuma das tabelas.");
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            fecharConexao(conexao);
+        }
+    }
+}
+
 
     private void atualizarPaciente(String cpf, Connection conexao) {
         System.out.print("Digite o novo nome do paciente: ");

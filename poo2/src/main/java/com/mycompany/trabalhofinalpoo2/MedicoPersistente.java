@@ -89,6 +89,55 @@ public class MedicoPersistente extends PersistenciaDeDados {
         }
     }
 }
+    public void consultarMedicos() {
+    Connection conexao = abrirConexao();
+    
+    if (conexao != null) {
+        String query = "SELECT crm, nome, especialidade, telefone, endereco, email, data_nascimento FROM medico";
+
+        try (PreparedStatement stmt = conexao.prepareStatement(query);
+             ResultSet rs = stmt.executeQuery()) {
+            
+            // Verifica se existem médicos na tabela
+            if (!rs.isBeforeFirst()) {
+                System.out.println("Nenhum médico encontrado.");
+            } else {
+                // Itera sobre todos os resultados e imprime os dados de cada médico
+                System.out.println("Detalhes de Todos os Médicos:");
+                while (rs.next()) {
+                    // Recupera os dados do médico
+                    String crm = rs.getString("crm");
+                    String nome = rs.getString("nome");
+                    String especialidade = rs.getString("especialidade");
+                    String telefone = rs.getString("telefone");
+                    String endereco = rs.getString("endereco");
+                    String email = rs.getString("email");
+                    java.sql.Date dataNascimento = rs.getDate("data_nascimento");
+
+                    // Formata a data de nascimento para o formato "dd/MM/yyyy"
+                    SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+                    String dataNascimentoStr = formatter.format(dataNascimento);
+
+                    // Imprime os detalhes do médico
+                    System.out.println("CRM: " + crm);
+                    System.out.println("Nome: " + nome);
+                    System.out.println("Especialidade: " + especialidade);
+                    System.out.println("Telefone: " + telefone);
+                    System.out.println("Endereço: " + endereco);
+                    System.out.println("Email: " + email);
+                    System.out.println("Data de Nascimento: " + dataNascimentoStr);
+                    System.out.println("-----------------------------------------");
+                }
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        } finally {
+            fecharConexao(conexao);
+        }
+    }
+}
+
+
     @Override
     protected void fecharConexao(Connection conexao) {
         if (conexao != null) {
